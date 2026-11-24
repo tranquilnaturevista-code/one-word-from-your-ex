@@ -44,6 +44,11 @@ def main() -> int:
     if len(written.split()) != 1:
         print("error: entry must be exactly one word", file=sys.stderr)
         return 1
+    # One word means letters only: a digit, hyphen, or punctuation
+    # would make it a code or a fragment, not a word an ex would say.
+    if not written.isalpha():
+        print("error: entry must be letters only", file=sys.stderr)
+        return 1
     print(f"wrote {path} ({len(written)} characters, "
           f"{len(written.encode('utf-8'))} bytes)")
     return 0
